@@ -1,0 +1,125 @@
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  background: #f6f8fa;
+}
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1a2236;
+  color: #fff;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+}
+
+/* Shared Leaflet map container style */
+.leaflet-embed {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.map-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 10px;
+  margin-bottom: 16px;
+}
+.sidebar h2 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar li {
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sidebar li.active, .sidebar li:hover {
+  background: #28304d;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: #f6f8fa;
+}
+
+.dashboard h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+.kpi-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.kpi {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1.5rem 2rem;
+  min-width: 160px;
+  text-align: left;
+}
+.kpi h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1a2236;
+}
+.kpi p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28304d;
+}
+.charts-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.chart-placeholder {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-width: 220px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+@media (max-width: 900px) {
+  .main-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    box-shadow: none;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .content {
+    padding: 1rem;
+  }
+  .kpi-row, .charts-row {
+    gap: 1rem;
+  }
+}

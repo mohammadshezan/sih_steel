@@ -1,0 +1,93 @@
+
+.route-schedule-pro {
+  background: #f5f7fa;
+  padding: 2rem 1rem;
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+}
+.route-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.route-header h2 {
+  color: #1976d2;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.route-filter {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #bdbdbd;
+  font-size: 1rem;
+  background: #fff;
+  min-width: 260px;
+}
+.route-card-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.route-map-card, .route-status-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  padding: 1.2rem 1.5rem;
+  min-width: 320px;
+  max-width: 400px;
+  flex: 1;
+}
+.route-map-pro {
+  background: #e3eaf2;
+  border-radius: 8px;
+  height: 220px;
+  margin-top: 1rem;
+}
+.route-status-card ul {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+.gantt-chart-pro {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  padding: 1.2rem 1.5rem;
+  margin: 2rem 0;
+}
+.gantt-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+.gantt-bar {
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.alerts-pro {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  padding: 1.2rem 1.5rem;
+  margin-top: 2rem;
+}
+.alerts-pro h3 {
+  color: #e53935;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.alerts-pro ul {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 900px) {
+  .route-card-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}

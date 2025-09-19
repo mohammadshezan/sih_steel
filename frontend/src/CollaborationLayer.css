@@ -1,0 +1,63 @@
+.collab-layer {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.chat-box {
+  background: #f6f8fa;
+  border-radius: 6px;
+  padding: 1rem;
+  min-height: 120px;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.chat-msg {
+  margin-bottom: 0.7rem;
+  color: #28304d;
+}
+.chat-input-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.chat-input-row input {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #eaeaea;
+}
+.chat-input-row button {
+  padding: 0.7rem 1.2rem;
+  background: #0088FE;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chat-input-row button:hover {
+  background: #005fa3;
+}
+.push-notifications, .role-channels {
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.push-notifications h3, .role-channels h3 {
+  margin-top: 0;
+  color: #d48806;
+}
+.push-notifications ul, .role-channels ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.push-notifications li, .role-channels li {
+  color: #d48806;
+  font-weight: 500;
+}

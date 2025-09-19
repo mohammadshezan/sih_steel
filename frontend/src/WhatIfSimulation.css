@@ -1,0 +1,67 @@
+.whatif-simulation {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.simulation-controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+.simulation-controls label {
+  font-size: 1rem;
+  color: #28304d;
+}
+.simulation-controls input {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #eaeaea;
+  width: 80px;
+}
+.simulation-controls button {
+  padding: 0.7rem 1.2rem;
+  background: #0088FE;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.simulation-controls button:hover {
+  background: #005fa3;
+}
+.simulation-result {
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+.simulation-result h3 {
+  margin-top: 0;
+  color: #1890ff;
+}
+.simulation-result ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.simulation-result li {
+  color: #1890ff;
+  font-weight: 500;
+}
+.ai-placeholder {
+  margin-top: 2rem;
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 6px;
+  padding: 1rem;
+}
+.ai-placeholder h4 {
+  margin: 0 0 0.5rem 0;
+  color: #d48806;
+}

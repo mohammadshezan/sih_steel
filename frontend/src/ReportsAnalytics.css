@@ -1,0 +1,63 @@
+
+.reports-analytics-pro {
+  background: #f5f7fa;
+  padding: 2rem 1rem;
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+}
+.reports-header {
+  margin-bottom: 2rem;
+}
+.reports-header h2 {
+  color: #1976d2;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.metrics-row-pro {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.metric-pro {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  padding: 1.5rem 2rem;
+  min-width: 180px;
+  text-align: left;
+}
+.metric-pro h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1976d2;
+}
+.metric-pro p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28304d;
+}
+.export-options-pro {
+  margin-top: 2rem;
+}
+.export-btn {
+  margin-right: 1rem;
+  padding: 0.7rem 1.2rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+.export-btn:hover {
+  background: #28304d;
+}
+@media (max-width: 900px) {
+  .metrics-row-pro {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}

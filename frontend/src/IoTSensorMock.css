@@ -1,0 +1,46 @@
+.iot-sensor-mock {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.iot-sensor-mock table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+.iot-sensor-mock th, .iot-sensor-mock td {
+  border: 1px solid #eaeaea;
+  padding: 0.7rem;
+  text-align: left;
+}
+.iot-sensor-mock th {
+  background: #f6f8fa;
+}
+.sensor-visuals {
+  margin-bottom: 1.5rem;
+}
+.rake-track {
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 6px;
+  padding: 0.7rem;
+  margin-bottom: 0.7rem;
+  color: #1890ff;
+  font-weight: 500;
+}
+.env-conditions {
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 6px;
+  padding: 1rem;
+}
+.env-conditions h3 {
+  margin-top: 0;
+  color: #d48806;
+}
+.env-conditions p {
+  color: #d48806;
+  font-weight: 500;
+}

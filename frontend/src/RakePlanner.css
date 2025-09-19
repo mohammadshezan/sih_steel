@@ -1,0 +1,72 @@
+.rake-planner {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.planner-controls {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+.planner-controls label {
+  font-size: 1rem;
+  color: #28304d;
+}
+.planner-controls select {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #eaeaea;
+}
+.wagons-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.wagon {
+  background: #f6f8fa;
+  border-radius: 6px;
+  padding: 1rem;
+  min-width: 140px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  text-align: center;
+}
+.wagon.assigned {
+  background: #d6f5d6;
+  border: 1px solid #b7eb8f;
+}
+.wagon button {
+  margin-top: 0.7rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #0088FE;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.wagon button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+.planner-summary {
+  background: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.ai-suggestion {
+  margin-top: 1rem;
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 6px;
+  padding: 0.7rem;
+}
+.ai-suggestion h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1890ff;
+}
