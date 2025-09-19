@@ -7,7 +7,11 @@ const pgPool = new Pool({
 });
 
 function connectMongo() {
-  return mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/steel');
+  const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/steel';
+  const timeout = parseInt(process.env.MONGO_TIMEOUT_MS || '3000', 10);
+  return mongoose.connect(uri, {
+    serverSelectionTimeoutMS: timeout,
+  });
 }
 
 module.exports = { pgPool, connectMongo };

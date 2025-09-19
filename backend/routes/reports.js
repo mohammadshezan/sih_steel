@@ -6,4 +6,8 @@ const router = express.Router();
 const reportsController = require('../controllers/reportsController');
 router.get('/metrics', reportsController.getMetrics);
 
+// Exports
+router.get('/export/pdf', reportsController.exportPdf);
+router.get('/export/xlsx', reportsController.exportXlsx);
+
 module.exports = router;

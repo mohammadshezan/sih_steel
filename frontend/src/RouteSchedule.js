@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import './RouteSchedule.css';
+import { apiFetch } from './utils/api';
 
 // Fallback positions if backend not available
 const rakePositions = [
@@ -52,8 +53,7 @@ function RouteSchedule() {
     };
     const fetchLastPlan = async () => {
       try {
-        const res = await fetch('http://localhost:5001/api/rake/last');
-        const data = await res.json();
+        const data = await apiFetch('http://localhost:5001/api/rake/last');
         if (data && data.origin && data.destinationCoords) setLastPlan(data);
         else setLastPlan(null);
       } catch (_) {

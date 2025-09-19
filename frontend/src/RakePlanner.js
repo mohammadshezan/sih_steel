@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RakePlanner.css';
+import { apiFetch } from './utils/api';
 
 const initialWagons = [
   { id: 1, type: 'Open', cargo: '', assigned: false },
@@ -21,19 +22,18 @@ function RakePlanner() {
   };
 
   // Send rake plan to backend
-  const submitPlan = () => {
+  const submitPlan = async () => {
     const plan = {
       wagons,
       cargo: selectedCargo,
       destination: selectedDestination
     };
-    fetch('http://localhost:5001/api/rake/plan', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(plan)
-    })
-      .then(res => res.json())
-      .then(data => alert('Rake plan submitted!\n' + JSON.stringify(data)));
+    try {
+      const data = await apiFetch('http://localhost:5001/api/rake/plan', { method: 'POST', body: JSON.stringify(plan) });
+      alert('Rake plan submitted!\n' + JSON.stringify(data));
+    } catch (e) {
+      alert('Failed to submit plan: ' + e.message);
+    }
   };
 
   return (

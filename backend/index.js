@@ -1,11 +1,40 @@
 // Main entry for backend API
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const { connectMongo } = require('./utils/db');
+const { verifyToken } = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
-app.use(express.json());
+// Security and parsers
+app.use(helmet());
+app.use(cors({ origin: process.env.CORS_ORIGIN || '*', credentials: true }));
+app.use(express.json({ limit: '1mb' }));
+
+// Basic rate limiting
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 1000 });
+app.use(limiter);
+
+// Enforce JWT on all API routes except open paths (temporary whitelist for dev UI)
+app.use((req, res, next) => {
+  const openPrefixes = ['/api/auth'];
+  const openExact = [
+    '/',
+    '/healthz',
+    '/api/iot/rake',
+    '/api/alerts/list',
+    '/api/reports/metrics',
+    '/api/demand/inventory',
+    '/api/demand/customer'
+  ];
+  const isOpenPrefix = openPrefixes.some((p) => req.originalUrl.startsWith(p));
+  const isOpenExact = openExact.includes(req.path);
+  if (isOpenPrefix || isOpenExact) return next();
+  return verifyToken(req, res, next);
+});
 
 // Modular routes
 app.use('/api/auth', require('./routes/auth'));
@@ -27,6 +56,19 @@ app.get('/', (req, res) => {
   res.send('Steel Logistics Backend API Running');
 });
 
-app.listen(PORT, () => {
-  console.log(`Backend server running on port ${PORT}`);
-});
+// Health endpoint
+app.get('/healthz', (req, res) => res.json({ ok: true }));
+
+// Start server after DB connects
+connectMongo()
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.warn('MongoDB connection failed, continuing to start server. Some endpoints may be limited. Error:', err.message);
+  })
+  .finally(() => {
+    app.listen(PORT, () => {
+      console.log(`Backend server running on port ${PORT}`);
+    });
+  });

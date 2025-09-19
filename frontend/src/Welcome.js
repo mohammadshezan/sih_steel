@@ -4,8 +4,18 @@ import ministryLogo from './assets/ministry-logo.png';
 import partnerLogo from './assets/partner-logo.png';
 
 function Welcome({ onContinue }) {
+  const params = new URLSearchParams(window.location.search);
+  const useRefBg = params.has('refbg');
+  const bgStyle = useRefBg
+    ? {
+        backgroundImage: `url(${process.env.PUBLIC_URL + '/reference/ref.png'})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top left',
+        backgroundSize: 'contain',
+      }
+    : undefined;
   return (
-    <div className="welcome-page">
+    <div className={`welcome-page ${useRefBg ? 'use-ref-bg' : ''}`} style={bgStyle}>
       <header className="welcome-header">
         <img src={ministryLogo} alt="Ministry Logo" className="logo" />
         <span className="welcome-title">Steel Logistics Platform</span>

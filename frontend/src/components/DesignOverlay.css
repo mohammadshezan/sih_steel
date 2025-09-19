@@ -1,0 +1,24 @@
+.design-overlay__img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.design-overlay__panel {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 10000;
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  font-size: 12px;
+}
+.design-overlay__panel label { display: block; margin: 6px 0 2px; }
+.design-overlay__panel input[type="range"] { width: 180px; }
+.design-overlay__panel .row { display:flex; align-items:center; gap:8px; }
+.design-overlay__panel button { margin-top:8px; padding:6px 10px; border:0; border-radius:6px; cursor:pointer; }

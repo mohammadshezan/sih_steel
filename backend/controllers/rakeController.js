@@ -1,5 +1,6 @@
-// In-memory last plan store (for demo). Replace with DB in production.
+// In-memory last plan store retained for fallback; but we persist to Mongo when available
 let lastPlan = null;
+const RakePlan = require('../models/RakePlan');
 
 // Map a destination to demo coordinates
 function destinationToCoords(destination) {
@@ -17,21 +18,49 @@ function destinationToCoords(destination) {
   }
 }
 
-exports.planRake = (req, res) => {
-  const { wagons, cargo, destination } = req.body || {};
-  const dest = destinationToCoords(destination);
-  lastPlan = {
-    submittedAt: new Date().toISOString(),
-    wagons: Array.isArray(wagons) ? wagons : [],
-    cargo: cargo || 'Unknown',
-    destination: destination || 'Unknown',
-    destinationCoords: dest,
-    origin: { name: 'Bokaro Plant', lat: 23.669, lng: 86.148 },
-  };
-  res.json({ message: 'Rake plan stored', plan: lastPlan });
+exports.planRake = async (req, res) => {
+  try {
+    const { wagons, cargo, destination } = req.body || {};
+    const dest = destinationToCoords(destination);
+    const plan = {
+      submittedAt: new Date(),
+      wagons: Array.isArray(wagons) ? wagons : [],
+      cargo: cargo || 'Unknown',
+      destination: destination || 'Unknown',
+      destinationCoords: dest,
+      origin: { name: 'Bokaro Plant', lat: 23.669, lng: 86.148 },
+      createdBy: req.user?.id || undefined,
+    };
+    lastPlan = { ...plan, submittedAt: plan.submittedAt.toISOString() };
+    // try persist
+    try {
+      const saved = await RakePlan.create(plan);
+      lastPlan._id = saved._id.toString();
+    } catch (e) {
+      // ignore persistence error for now
+    }
+    res.json({ message: 'Rake plan stored', plan: lastPlan });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to store rake plan' });
+  }
 };
 
-exports.getLastPlan = (req, res) => {
-  if (!lastPlan) return res.json({});
-  res.json(lastPlan);
+exports.getLastPlan = async (req, res) => {
+  if (lastPlan) return res.json(lastPlan);
+  try {
+    const recent = await RakePlan.findOne({}, {}, { sort: { submittedAt: -1 } }).lean();
+    if (!recent) return res.json({});
+    return res.json(recent);
+  } catch (_) {
+    return res.json({});
+  }
+};
+
+exports.listPlans = async (req, res) => {
+  try {
+    const items = await RakePlan.find({}).sort({ submittedAt: -1 }).limit(50).lean();
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to list plans' });
+  }
 };

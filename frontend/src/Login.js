@@ -9,18 +9,51 @@ const roles = [
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
-  const [role, setRole] = useState('admin');
+  const [role, setRole] = useState('manager');
   const [otp, setOtp] = useState('');
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     if (step === 1) {
-      // Simulate OTP send
-      setStep(2);
+      try {
+        setLoading(true);
+        const res = await fetch('http://localhost:5001/api/auth/otp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed to send OTP');
+        // In dev, allow showing devCode for convenience
+        if (data.devCode) setOtp(data.devCode);
+        setStep(2);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     } else {
-      // Simulate login
-      onLogin({ username, role });
+      try {
+        setLoading(true);
+        const res = await fetch('http://localhost:5001/api/auth/otp/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, otp })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Login failed');
+        // Save token for subsequent API calls
+        localStorage.setItem('token', data.token);
+        onLogin({ username, role: data.user?.role || role, token: data.token });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -50,7 +83,8 @@ function Login({ onLogin }) {
             <input value={otp} onChange={e => setOtp(e.target.value)} required />
           </label>
         )}
-        <button type="submit">{step === 1 ? 'Send OTP' : 'Login'}</button>
+        {error && <div style={{ color: 'crimson', marginTop: 8 }}>{error}</div>}
+        <button type="submit" disabled={loading}>{loading ? 'Please wait…' : (step === 1 ? 'Send OTP' : 'Login')}</button>
       </form>
       <div className="login-footer">
         <span>Digitally transforming steel supply chain for Indian Railways, SAIL, and partners.<br/>Efficient. Transparent. Sustainable.</span>

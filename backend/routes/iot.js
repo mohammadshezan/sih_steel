@@ -5,5 +5,6 @@ const router = express.Router();
 
 const iotController = require('../controllers/iotController');
 router.get('/rake', iotController.getRake);
+router.get('/history', iotController.getHistory);
 
 module.exports = router;

@@ -1,10 +1,29 @@
+/* Base layout + variables for pixel tuning */
 .welcome-page {
   background: #f5f7fa;
   min-height: 100vh;
   font-family: 'Inter', 'Roboto', Arial, sans-serif;
   display: flex;
   flex-direction: column;
+
+  /* Tunables */
+  --header-height: 72px;
+  --logo-height: 40px;
+  --title-fs: 24px;
+  --main-pad: 2rem;
+  --kpi-gap: 2rem;
+  --kpi-minw: 160px;
+  --kpi-radius: 12px;
+  --kpi-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  --btn-fs: 1.1rem;
 }
+
+/* Exact-replica mode: use reference image as background when ?refbg is present */
+.welcome-page.use-ref-bg {
+  /* background image is set inline; keep layout neutralization here */
+  /* Helps pixel-perfect alignment to the reference */
+}
+
 .welcome-header {
   display: flex;
   align-items: center;
@@ -13,48 +32,58 @@
   color: #fff;
   padding: 1.2rem 2rem;
   border-bottom: 2px solid #1976d2;
+  height: var(--header-height);
 }
+.welcome-page.use-ref-bg .welcome-header { background: transparent; border-bottom: none; padding: 0; }
+
 .logo {
-  height: 40px;
+  height: var(--logo-height);
   margin: 0 1rem;
 }
+
 .welcome-title {
-  font-size: 1.5rem;
+  font-size: var(--title-fs);
   font-weight: 600;
   letter-spacing: 1px;
 }
+
 .welcome-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: var(--main-pad) 1rem;
 }
+.welcome-page.use-ref-bg .welcome-main { padding: 0; }
+
 .welcome-main h1 {
   font-size: 2.2rem;
   color: #28304d;
   margin-bottom: 1rem;
 }
+
 .welcome-desc {
   font-size: 1.15rem;
   color: #28304d;
   margin-bottom: 2rem;
   text-align: center;
 }
+
 .welcome-kpi-row {
   display: flex;
-  gap: 2rem;
+  gap: var(--kpi-gap);
   margin-bottom: 2.5rem;
   flex-wrap: wrap;
   justify-content: center;
 }
+
 .welcome-kpi-card {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(40,48,77,0.08);
+  border-radius: var(--kpi-radius);
+  box-shadow: var(--kpi-shadow);
   padding: 1.2rem 2rem;
-  min-width: 160px;
+  min-width: var(--kpi-minw);
   text-align: center;
   font-size: 1.3rem;
   color: #1976d2;
@@ -63,28 +92,29 @@
   flex-direction: column;
   align-items: center;
 }
+
 .welcome-kpi-card span {
   font-size: 1rem;
   color: #28304d;
   font-weight: 400;
   margin-top: 0.5rem;
 }
+
 .welcome-btn {
   background: #1976d2;
   color: #fff;
   border: none;
   border-radius: 8px;
   padding: 0.8rem 2rem;
-  font-size: 1.1rem;
+  font-size: var(--btn-fs);
   font-weight: 600;
   cursor: pointer;
   margin-top: 2rem;
   box-shadow: 0 2px 8px rgba(40,48,77,0.08);
   transition: background 0.2s;
 }
-.welcome-btn:hover {
-  background: #28304d;
-}
+.welcome-btn:hover { background: #28304d; }
+
 .welcome-footer {
   background: #28304d;
   color: #fff;
@@ -93,6 +123,8 @@
   font-size: 0.95rem;
   border-top: 2px solid #1976d2;
 }
+.welcome-page.use-ref-bg .welcome-footer { background: transparent; border-top: none; padding: 0; color: transparent; }
+
 @media (max-width: 900px) {
   .welcome-kpi-row {
     flex-direction: column;

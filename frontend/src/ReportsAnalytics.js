@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './ReportsAnalytics.css';
+import { apiFetch } from './utils/api';
 
 function ReportsAnalytics() {
   const [metrics, setMetrics] = useState([]);
 
   useEffect(() => {
     const fetchMetrics = () => {
-      fetch('http://localhost:5001/api/reports/metrics')
-        .then(res => res.json())
+      apiFetch('http://localhost:5001/api/reports/metrics')
         .then(data => setMetrics(Array.isArray(data) ? data : []))
         .catch(() => setMetrics([]));
     };
@@ -15,6 +15,27 @@ function ReportsAnalytics() {
     const interval = setInterval(fetchMetrics, 5000); // Refresh every 5 seconds
     return () => clearInterval(interval);
   }, []);
+
+  const download = async (path, filename) => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`http://localhost:5001${path}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
+      });
+      if (!res.ok) throw new Error('Download failed');
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (e) {
+      alert(e.message || 'Failed to download');
+    }
+  };
 
 
   return (
@@ -32,8 +53,8 @@ function ReportsAnalytics() {
       </div>
       <div className="export-options-pro">
         <h3>Export Options</h3>
-        <button className="export-btn" onClick={() => alert('Exported to PDF!')}>Export PDF</button>
-        <button className="export-btn" onClick={() => alert('Exported to Excel!')}>Export Excel</button>
+        <button className="export-btn" onClick={() => download('/api/reports/export/pdf', 'reports.pdf')}>Export PDF</button>
+        <button className="export-btn" onClick={() => download('/api/reports/export/xlsx', 'reports.xlsx')}>Export Excel</button>
       </div>
     </div>
   );

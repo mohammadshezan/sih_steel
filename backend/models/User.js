@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['admin', 'manager', 'supervisor'], required: true },
   email: { type: String },
   phone: { type: String },
-  otp: { type: String },
+  otpHash: { type: String },
+  otpExpiresAt: { type: Date },
   createdAt: { type: Date, default: Date.now }
 });
 
